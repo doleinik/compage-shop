@@ -8,7 +8,7 @@ const Header = () => {
     let name = '';
     let display = '';
     if(user){
-        name = 'Hello, <span>' + user?.username + '</span>';
+        name = 'Hello, ' + user?.username ;
         display = 'block';
     } else {
         name = ''

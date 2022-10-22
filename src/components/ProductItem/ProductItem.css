@@ -1,7 +1,6 @@
 .product {
     display: flex;
     flex-direction: column;
-    gap: 30px;
     width: calc(50% - 15px);
     max-width: 200px;
 }

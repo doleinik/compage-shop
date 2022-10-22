@@ -2,9 +2,10 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 10px;
 }
 
 .item {
-    margin-right: 10px;
+    /*margin-right: 10px;*/
     margin-bottom: 10px;
 }
