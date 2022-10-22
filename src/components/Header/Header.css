@@ -9,3 +9,7 @@
 .username {
     margin-left: auto;
 }
+
+.username span{
+    text-transform: capitalize;
+}
