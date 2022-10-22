@@ -7,16 +7,16 @@ const Header = () => {
     const {user, onClose} = useTelegram();
     let name = '';
     if(user?.username){
-        name = user?.username;
+        name = 'Hello, <span>' + user?.username + '</span>';
     } else {
-        name = 'User'
+        name = ''
     }
 
     return (
         <div className={'header'}>
             <Button onClick={onClose}>Закрыть</Button>
             <span className={'username'}>
-                Hello, <span>{name}</span>
+                {name}
             </span>
         </div>
     );
