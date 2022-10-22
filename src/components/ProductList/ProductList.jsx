@@ -3,6 +3,7 @@ import './ProductList.css';
 import ProductItem from "../ProductItem/ProductItem";
 import {useTelegram} from "../../hooks/useTelegram";
 import {useCallback, useEffect} from "react";
+import {Link} from "react-router-dom";
 
 const products = [
     {id: '1', title: 'Джинсы', price: 5000, description: 'Синего цвета, прямые', img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'},
@@ -78,6 +79,8 @@ const ProductList = () => {
                     className={'item'}
                 />
             ))}
+
+            <Link to="/form" style={{color: 'white'}} activeStyle={{color: 'red'}}>Form</Link>
         </div>
     );
 };
