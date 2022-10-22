@@ -1,5 +1,3 @@
-window.Telegram = undefined;
-window.Telegram.WebApp = undefined;
 const tg = window.Telegram.WebApp;
 
 export function useTelegram(){
