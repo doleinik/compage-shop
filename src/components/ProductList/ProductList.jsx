@@ -80,7 +80,7 @@ const ProductList = () => {
                 />
             ))}
 
-            <Link to="/form" style={{color: 'white'}} activeStyle={{color: 'red'}}>Form</Link>
+            <Link to="/form">Form</Link>
         </div>
     );
 };
