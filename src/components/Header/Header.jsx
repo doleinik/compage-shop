@@ -5,12 +5,18 @@ import './Header.css';
 
 const Header = () => {
     const {user, onClose} = useTelegram();
+    let name = '';
+    if(user?.username){
+        name = user?.username;
+    } else {
+        name = 'User'
+    }
 
     return (
         <div className={'header'}>
             <Button onClick={onClose}>Закрыть</Button>
             <span className={'username'}>
-                Hello, <span>{user?.username}</span>
+                Hello, <span>{name}</span>
             </span>
         </div>
     );
