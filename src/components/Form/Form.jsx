@@ -4,11 +4,12 @@ import {useTelegram} from "../../hooks/useTelegram";
 
 
 const Form = () => {
-    const {tg, user} = useTelegram()
+    const {user, tg} = useTelegram();
     const [country, setCountry] = useState('');
     const [street, setStreet] = useState('');
     const [subject, setSubject] = useState('physical');
-    const name = user?.username;
+    const name = tg.initDataUnsafe?.user;
+    console.log(tg)
 
     const onSendData = useCallback(() => {
         const data = {
@@ -72,8 +73,8 @@ const Form = () => {
             />
             <input
                 className={'input'}
-                type="hidden"
-                placeholder={'User'}
+                type="text"
+                placeholder={name}
                 value={name}
             />
             <select value={subject} onChange={onChangeSubject} className={'select'}>
