@@ -8,7 +8,7 @@ const Form = () => {
     const [country, setCountry] = useState('');
     const [street, setStreet] = useState('');
     const [subject, setSubject] = useState('physical');
-    const [username, setUsername] = useState('');
+    const [name = user?.user?.username, setName] = useState('');
     const {tg} = useTelegram();
     // const username = user?.username;
 
@@ -17,7 +17,7 @@ const Form = () => {
             country,
             street,
             subject,
-            username
+            name
         }
         tg.sendData(JSON.stringify(data));
     }, [country, street, subject])
@@ -54,8 +54,8 @@ const Form = () => {
     const onChangeSubject = (e) => {
         setSubject(e.target.value)
     }
-    const onChangeUsername = (e) => {
-        setUsername(e.target.value)
+    const onChangeName = (e) => {
+        setName(e.target.value)
     }
 
     return (
@@ -79,8 +79,8 @@ const Form = () => {
                 className={'input'}
                 type="hidden"
                 placeholder={'User'}
-                value={username}
-                onChange={onChangeUsername}
+                value={name}
+                onChange={onChangeName}
             />
             <select value={subject} onChange={onChangeSubject} className={'select'}>
                 <option value={'physical'}>Физ. лицо</option>
