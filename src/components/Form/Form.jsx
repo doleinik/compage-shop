@@ -8,7 +8,7 @@ const Form = () => {
     const [country, setCountry] = useState('');
     const [street, setStreet] = useState('');
     const [subject, setSubject] = useState('physical');
-    const name = user;
+    const name = 'dima';
     console.log(name)
 
     const onSendData = useCallback(() => {
@@ -56,6 +56,7 @@ const Form = () => {
 
     return (
         <div className={"form"}>
+            <textarea name="" id="" cols="30" rows="10">{tg}</textarea>
             <h3>Введите ваши данные</h3>
             <input
                 className={'input'}
