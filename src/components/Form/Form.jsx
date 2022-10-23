@@ -69,6 +69,7 @@ const Form = () => {
                 value={street}
                 onChange={onChangeStreet}
             />
+            <input type="text" value={user?.username}/>
             <select value={subject} onChange={onChangeSubject} className={'select'}>
                 <option value={'physical'}>Физ. лицо</option>
                 <option value={'legal'}>Юр. лицо</option>
