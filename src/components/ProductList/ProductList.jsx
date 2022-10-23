@@ -6,14 +6,62 @@ import {useCallback, useEffect} from "react";
 import {Link} from "react-router-dom";
 
 const products = [
-    {id: '1', title: 'Джинсы', price: 5000, description: 'Синего цвета, прямые', img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'},
-    {id: '2', title: 'Куртка', price: 12000, description: 'Зеленого цвета, теплая', img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'},
-    {id: '3', title: 'Джинсы 2', price: 5000, description: 'Синего цвета, прямые', img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'},
-    {id: '4', title: 'Куртка 8', price: 122, description: 'Зеленого цвета, теплая', img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'},
-    {id: '5', title: 'Джинсы 3', price: 5000, description: 'Синего цвета, прямые', img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'},
-    {id: '6', title: 'Куртка 7', price: 600, description: 'Зеленого цвета, теплая', img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'},
-    {id: '7', title: 'Джинсы 4', price: 5500, description: 'Синего цвета, прямые', img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'},
-    {id: '8', title: 'Куртка 5', price: 12000, description: 'Зеленого цвета, теплая', img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'},
+    {
+        id: '1',
+        title: 'Джинсы',
+        price: 5000,
+        description: 'Синего цвета, прямые',
+        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
+    },
+    {
+        id: '2',
+        title: 'Куртка',
+        price: 12000,
+        description: 'Зеленого цвета, теплая',
+        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
+    },
+    {
+        id: '3',
+        title: 'Джинсы 2',
+        price: 5000,
+        description: 'Синего цвета, прямые',
+        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
+    },
+    {
+        id: '4',
+        title: 'Куртка 8',
+        price: 122,
+        description: 'Зеленого цвета, теплая',
+        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
+    },
+    {
+        id: '5',
+        title: 'Джинсы 3',
+        price: 5000,
+        description: 'Синего цвета, прямые',
+        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
+    },
+    {
+        id: '6',
+        title: 'Куртка 7',
+        price: 600,
+        description: 'Зеленого цвета, теплая',
+        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
+    },
+    {
+        id: '7',
+        title: 'Джинсы 4',
+        price: 5500,
+        description: 'Синего цвета, прямые',
+        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
+    },
+    {
+        id: '8',
+        title: 'Куртка 5',
+        price: 12000,
+        description: 'Зеленого цвета, теплая',
+        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
+    },
 ]
 
 const getTotalPrice = (items = []) => {
@@ -26,33 +74,33 @@ const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
     const {tg, queryId} = useTelegram();
 
-    const onSendData = useCallback(() => {
-        const data = {
-            products: addedItems,
-            totalPrice: getTotalPrice(addedItems),
-            queryId,
-        }
-        fetch('http://54.78.134.111:8000/web-data', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-    }, [addedItems])
-
-    useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSendData)
-        return () => {
-            tg.offEvent('mainButtonClicked', onSendData)
-        }
-    }, [onSendData])
+    // const onSendData = useCallback(() => {
+    //     const data = {
+    //         products: addedItems,
+    //         totalPrice: getTotalPrice(addedItems),
+    //         queryId,
+    //     }
+    //     fetch('http://54.78.134.111:8000/web-data', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(data)
+    //     })
+    // }, [addedItems])
+    //
+    // useEffect(() => {
+    //     tg.onEvent('mainButtonClicked', onSendData)
+    //     return () => {
+    //         tg.offEvent('mainButtonClicked', onSendData)
+    //     }
+    // }, [onSendData])
 
     const onAdd = (product) => {
         const alreadyAdded = addedItems.find(item => item.id === product.id);
         let newItems = [];
 
-        if(alreadyAdded) {
+        if (alreadyAdded) {
             newItems = addedItems.filter(item => item.id !== product.id);
         } else {
             newItems = [...addedItems, product];
@@ -60,7 +108,7 @@ const ProductList = () => {
 
         setAddedItems(newItems)
 
-        if(newItems.length === 0) {
+        if (newItems.length === 0) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
