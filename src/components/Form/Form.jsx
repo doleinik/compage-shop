@@ -4,13 +4,11 @@ import {useTelegram} from "../../hooks/useTelegram";
 
 
 const Form = () => {
-    const {user} = useTelegram()
+    const {tg, user} = useTelegram()
     const [country, setCountry] = useState('');
     const [street, setStreet] = useState('');
     const [subject, setSubject] = useState('physical');
-    const [name, setName] = useState('');
-    const {tg} = useTelegram();
-    // const username = user?.username;
+    const name = user?.username;
 
     const onSendData = useCallback(() => {
         const data = {
@@ -54,9 +52,6 @@ const Form = () => {
     const onChangeSubject = (e) => {
         setSubject(e.target.value)
     }
-    const onChangeName = (e) => {
-        setName(e.target.value)
-    }
 
     return (
         <div className={"form"}>
@@ -79,8 +74,7 @@ const Form = () => {
                 className={'input'}
                 type="hidden"
                 placeholder={'User'}
-                value={user?.username}
-                // onChange={onChangeName}
+                value={name}
             />
             <select value={subject} onChange={onChangeSubject} className={'select'}>
                 <option value={'physical'}>Физ. лицо</option>
