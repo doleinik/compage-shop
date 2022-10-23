@@ -72,12 +72,6 @@ const Form = () => {
                 value={street}
                 onChange={onChangeStreet}
             />
-            <input
-                className={'input'}
-                type="text"
-                placeholder={name}
-                value={name}
-            />
             <select value={subject} onChange={onChangeSubject} className={'select'}>
                 <option value={'physical'}>Физ. лицо</option>
                 <option value={'legal'}>Юр. лицо</option>
