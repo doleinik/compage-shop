@@ -1,14 +1,13 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import './Form.css';
-import {useTelegram} from "../../hooks/useTelegram";
+const tg = window.Telegram.WebApp;
 
 
 const Form = () => {
-    const {user, tg} = useTelegram();
     const [country, setCountry] = useState('');
     const [street, setStreet] = useState('');
     const [subject, setSubject] = useState('physical');
-    const name = 'dima';
+    const name = tg.initDataUnsafe?.user?.username;
     console.log(name)
 
     const onSendData = useCallback(() => {
@@ -56,7 +55,6 @@ const Form = () => {
 
     return (
         <div className={"form"}>
-            <textarea name="" id="" cols="30" rows="10">{tg}</textarea>
             <h3>Введите ваши данные</h3>
             <input
                 className={'input'}
