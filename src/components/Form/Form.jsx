@@ -80,7 +80,7 @@ const Form = () => {
                 type="hidden"
                 placeholder={'User'}
                 value={user?.username}
-                onChange={onChangeName}
+                // onChange={onChangeName}
             />
             <select value={subject} onChange={onChangeSubject} className={'select'}>
                 <option value={'physical'}>Физ. лицо</option>
