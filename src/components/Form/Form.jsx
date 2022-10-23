@@ -8,8 +8,8 @@ const Form = () => {
     const [country, setCountry] = useState('');
     const [street, setStreet] = useState('');
     const [subject, setSubject] = useState('physical');
-    const name = tg.initDataUnsafe?.user;
-    console.log(tg)
+    const name = user;
+    console.log(name)
 
     const onSendData = useCallback(() => {
         const data = {
