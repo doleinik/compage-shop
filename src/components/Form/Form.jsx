@@ -8,7 +8,7 @@ const Form = () => {
     const [country, setCountry] = useState('');
     const [street, setStreet] = useState('');
     const [subject, setSubject] = useState('physical');
-    const [name = user?.user?.username, setName] = useState('');
+    const [name, setName] = useState('');
     const {tg} = useTelegram();
     // const username = user?.username;
 
@@ -79,7 +79,7 @@ const Form = () => {
                 className={'input'}
                 type="hidden"
                 placeholder={'User'}
-                value={name}
+                value={user?.username}
                 onChange={onChangeName}
             />
             <select value={subject} onChange={onChangeSubject} className={'select'}>
