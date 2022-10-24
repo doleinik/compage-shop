@@ -37,7 +37,7 @@ const Form = () => {
         if (!street || !country) {
             tg.MainButton.hide();
         } else {
-            onChangeName('user?.username')
+            onChangeName(user?.username);
             tg.MainButton.show();
         }
     }, [country, street])
