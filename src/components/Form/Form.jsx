@@ -6,15 +6,21 @@ const Form = () => {
     const [country, setCountry] = useState('');
     const [street, setStreet] = useState('');
     const [subject, setSubject] = useState('physical');
+    const name = '';
     const {tg, user} = useTelegram();
 
+
+
+    useEffect((name) => {
+         name = tg.initDataUnsafe?.user?.username;
+    }, [name])
 
     const onSendData = useCallback(() => {
         const data = {
             country,
             street,
             subject,
-            user: user?.username
+            name
         }
         tg.sendData(JSON.stringify(data));
     }, [country, street, subject])
@@ -25,6 +31,12 @@ const Form = () => {
             tg.offEvent('mainButtonClicked', onSendData)
         }
     }, [onSendData])
+
+    useEffect(() => {
+        tg.MainButton.setParams({
+            text: 'Отправить данные'
+        })
+    }, [])
 
     useEffect(() => {
         tg.MainButton.setParams({
