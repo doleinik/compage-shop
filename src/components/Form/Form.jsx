@@ -8,7 +8,12 @@ const Form = () => {
     const [country, setCountry] = useState('');
     const [street, setStreet] = useState('');
     const [subject, setSubject] = useState('physical');
-    const [name, setName] = useState('');
+    let name = '';
+
+    const onChangeName = () => {
+        name = user?.username;
+    }
+    onChangeName();
 
     const onSendData = useCallback(() => {
         const data = {
@@ -20,11 +25,7 @@ const Form = () => {
         tg.sendData(JSON.stringify(data));
     }, [country, street, subject, name])
 
-    const onChangeName = () => {
-        setName(user?.username)
-    }
 
-    onChangeName();
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
         return () => {
