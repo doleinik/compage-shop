@@ -7,14 +7,13 @@ const Form = () => {
     const [street, setStreet] = useState('');
     const [subject, setSubject] = useState('physical');
     const {tg, user} = useTelegram();
-    const name = user?.username;
 
     const onSendData = useCallback(() => {
         const data = {
             country,
             street,
             subject,
-            name
+            name: user?.username
         }
         tg.sendData(JSON.stringify(data));
     }, [country, street, subject])
