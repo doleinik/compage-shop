@@ -20,6 +20,11 @@ const Form = () => {
         tg.sendData(JSON.stringify(data));
     }, [country, street, subject, name])
 
+    const onChangeName = () => {
+        setName(user?.username)
+    }
+
+    onChangeName();
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
         return () => {
@@ -37,7 +42,6 @@ const Form = () => {
         if (!street || !country) {
             tg.MainButton.hide();
         } else {
-            onChangeName(user?.username);
             tg.MainButton.show();
         }
     }, [country, street])
@@ -54,9 +58,6 @@ const Form = () => {
         setSubject(e.target.value)
     }
 
-    const onChangeName = (e) => {
-        setName(e)
-    }
 
     return (
         <div className={"form"}>
