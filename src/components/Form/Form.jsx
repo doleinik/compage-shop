@@ -3,20 +3,22 @@ import './Form.css';
 import {useTelegram} from "../../hooks/useTelegram";
 
 const Form = () => {
+    const {tg, user} = useTelegram();
+
     const [country, setCountry] = useState('');
     const [street, setStreet] = useState('');
     const [subject, setSubject] = useState('physical');
-    const {tg, user} = useTelegram();
+    const [name, setName] = useState('');
 
     const onSendData = useCallback(() => {
         const data = {
             country,
             street,
             subject,
-            name: user?.username
+            name
         }
         tg.sendData(JSON.stringify(data));
-    }, [country, street, subject])
+    }, [country, street, subject, name])
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
@@ -32,9 +34,10 @@ const Form = () => {
     }, [])
 
     useEffect(() => {
-        if(!street || !country) {
+        if (!street || !country) {
             tg.MainButton.hide();
         } else {
+            onChangeName('user?.username')
             tg.MainButton.show();
         }
     }, [country, street])
@@ -49,6 +52,10 @@ const Form = () => {
 
     const onChangeSubject = (e) => {
         setSubject(e.target.value)
+    }
+
+    const onChangeName = (e) => {
+        setName(e)
     }
 
     return (
