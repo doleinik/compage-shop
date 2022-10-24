@@ -9,15 +9,15 @@ const Header = () => {
     let display = '';
     if(user){
         name = 'Hello, ' + user?.username ;
-        display = 'block';
+        display = 'display:block';
     } else {
         name = ''
-        display = 'none';
+        display = 'display:none';
     }
 
     return (
         <div className={'header'}>
-            <Button onClick={onClose} style={{display: display}}>Закрыть</Button>
+            <Button onClick={onClose} style={{display}}>Закрыть</Button>
             <span className={'username'}>
                 {name}
             </span>

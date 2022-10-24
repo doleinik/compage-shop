@@ -6,14 +6,8 @@ const Form = () => {
     const [country, setCountry] = useState('');
     const [street, setStreet] = useState('');
     const [subject, setSubject] = useState('physical');
-    const name = '';
     const {tg, user} = useTelegram();
-
-
-
-    useEffect((name) => {
-         name = tg.initDataUnsafe?.user?.username;
-    }, [name])
+    const name = user?.username;
 
     const onSendData = useCallback(() => {
         const data = {
@@ -31,12 +25,6 @@ const Form = () => {
             tg.offEvent('mainButtonClicked', onSendData)
         }
     }, [onSendData])
-
-    useEffect(() => {
-        tg.MainButton.setParams({
-            text: 'Отправить данные'
-        })
-    }, [])
 
     useEffect(() => {
         tg.MainButton.setParams({
@@ -81,7 +69,6 @@ const Form = () => {
                 value={street}
                 onChange={onChangeStreet}
             />
-            <input type="text" value={user?.username}/>
             <select value={subject} onChange={onChangeSubject} className={'select'}>
                 <option value={'physical'}>Физ. лицо</option>
                 <option value={'legal'}>Юр. лицо</option>
