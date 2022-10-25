@@ -20,10 +20,9 @@ const Form = () => {
             country,
             street,
             subject,
-            name
         }
         tg.sendData(JSON.stringify(data));
-    }, [country, street, subject, name])
+    }, [country, street, subject])
 
 
     useEffect(() => {
@@ -58,7 +57,6 @@ const Form = () => {
     const onChangeSubject = (e) => {
         setSubject(e.target.value)
     }
-
 
     return (
         <div className={"form"}>
