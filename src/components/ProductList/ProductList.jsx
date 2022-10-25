@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import './ProductList.css';
 import ProductItem from "../ProductItem/ProductItem";
-import {useTelegram} from "../../hooks/useTelegram";
-import {useCallback, useEffect} from "react";
-import {Link} from "react-router-dom";
+import Pagination from "../Pagination/Pagination";
+import {useEffect} from "react";
 
 const products = [
     {
@@ -15,121 +14,121 @@ const products = [
     },
     {
         id: '2',
-        title: 'Куртка',
+        title: 'Куртка 2',
         price: 12000,
         description: 'Зеленого цвета, теплая',
         img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
     },
     {
         id: '3',
-        title: 'Джинсы 2',
-        price: 5000,
-        description: 'Синего цвета, прямые',
-        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
-    },
-    {
-        id: '4',
-        title: 'Куртка 8',
-        price: 122,
-        description: 'Зеленого цвета, теплая',
-        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
-    },
-    {
-        id: '5',
         title: 'Джинсы 3',
         price: 5000,
         description: 'Синего цвета, прямые',
         img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
     },
     {
+        id: '4',
+        title: 'Куртка 4',
+        price: 122,
+        description: 'Зеленого цвета, теплая',
+        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
+    },
+    {
+        id: '5',
+        title: 'Джинсы 5',
+        price: 5000,
+        description: 'Синего цвета, прямые',
+        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
+    },
+    {
         id: '6',
-        title: 'Куртка 7',
+        title: 'Куртка 6',
         price: 600,
         description: 'Зеленого цвета, теплая',
         img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
     },
     {
         id: '7',
-        title: 'Джинсы 4',
+        title: 'Джинсы 7',
         price: 5500,
         description: 'Синего цвета, прямые',
         img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
     },
     {
         id: '8',
-        title: 'Куртка 5',
+        title: 'Куртка 8',
+        price: 12000,
+        description: 'Зеленого цвета, теплая',
+        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
+    },
+    {
+        id: '9',
+        title: 'Куртка 9',
+        price: 12000,
+        description: 'Зеленого цвета, теплая',
+        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
+    },
+    {
+        id: '10',
+        title: 'Куртка 10',
+        price: 12000,
+        description: 'Зеленого цвета, теплая',
+        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
+    },
+    {
+        id: '11',
+        title: 'Куртка 10',
+        price: 12000,
+        description: 'Зеленого цвета, теплая',
+        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
+    },
+    {
+        id: '11',
+        title: 'Куртка 10',
+        price: 12000,
+        description: 'Зеленого цвета, теплая',
+        img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
+    },
+    {
+        id: '12',
+        title: 'Куртка 10',
         price: 12000,
         description: 'Зеленого цвета, теплая',
         img: 'https://img3.akspic.ru/crops/7/0/2/1/5/151207/151207-chernyy-svet-noch-chernyj_i_belyj-temnota-1080x1920.jpg'
     },
 ]
 
-const getTotalPrice = (items = []) => {
-    return items.reduce((acc, item) => {
-        return acc += item.price
-    }, 0)
-}
-
 const ProductList = () => {
-    const [addedItems, setAddedItems] = useState([]);
-    const {tg, queryId} = useTelegram();
-
-    const onSendData = useCallback(() => {
-        const data = {
-            products: addedItems,
-            totalPrice: getTotalPrice(addedItems),
-            queryId,
-        }
-        fetch('https://visionary-kheer-69c0b8.netlify.app/web-data', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-    }, [addedItems])
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postPrePage] = useState(6);
 
     useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSendData)
-        return () => {
-            tg.offEvent('mainButtonClicked', onSendData)
-        }
-    }, [onSendData])
+        setLoading(false);
+    }, []);
 
-    const onAdd = (product) => {
-        const alreadyAdded = addedItems.find(item => item.id === product.id);
-        let newItems = [];
+    const indexOfLastPost = currentPage * postPrePage;
+    const indexOfFirstPost = indexOfLastPost - postPrePage;
+    const currentPosts = products.slice(indexOfFirstPost, indexOfLastPost);
 
-        if (alreadyAdded) {
-            newItems = addedItems.filter(item => item.id !== product.id);
-        } else {
-            newItems = [...addedItems, product];
-        }
-
-        setAddedItems(newItems)
-
-        if (newItems.length === 0) {
-            tg.MainButton.hide();
-        } else {
-            tg.MainButton.show();
-            tg.MainButton.setParams({
-                text: `Купить ${getTotalPrice(newItems)}`
-            })
-        }
-    }
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
     return (
-        <div className={'list'}>
-            {products.map(item => (
-                <ProductItem
-                    product={item}
-                    onAdd={onAdd}
-                    className={'item'}
-                />
-            ))}
+        <div>
 
-            <Link to="/form">Form</Link>
+            <div className={'list'}>
+                {currentPosts.map(item => (
+                    <ProductItem kay={item.id}
+                                 product={item}
+                                 className={'item'}
+                                 loading={loading}
+                                 curentPage={currentPage}
+                    />
+                ))}
+            </div>
+            <Pagination postsPrePage={postPrePage} totalPosts={products.length} paginate={paginate}/>
         </div>
+
     );
 };
 

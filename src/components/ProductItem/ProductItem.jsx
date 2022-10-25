@@ -3,10 +3,10 @@ import Button from "../Button/Button";
 import './ProductItem.css';
 
 
-const ProductItem = ({product, className, onAdd}) => {
+const ProductItem = ({product, className, loading}) => {
 
-    const onAddHandler = () => {
-        onAdd(product);
+    if (loading) {
+        return <h2 style={{color:"black"}}>Loading...</h2>
     }
 
     return (
@@ -15,11 +15,11 @@ const ProductItem = ({product, className, onAdd}) => {
                 <img src={product.img} alt="img"/>
             </div>
             <div className={'title'}>{product.title}</div>
-            <div className={'description'}>{product.description}</div>
+            <div className={'description'}>{product.body}</div>
             <div className={'price'}>
                 <span>Стоимость: <b>{product.price}</b></span>
             </div>
-            <Button className={'add-btn'} onClick={onAddHandler}>
+            <Button className={'add-btn'}>
                 Добавить в корзину
             </Button>
         </div>

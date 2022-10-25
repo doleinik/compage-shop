@@ -1,0 +1,14 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.page-item {
+    padding: 5px 10px;
+    border: 1px solid blue;
+    list-style-type: none; /* Убираем маркеры */
+}
+.page-item a{
+   text-decoration: none;
+}
