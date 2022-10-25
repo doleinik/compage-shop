@@ -5,6 +5,17 @@ import Header from "./components/Header/Header";
 import {Route, Routes} from 'react-router-dom'
 import ProductList from "./components/ProductList/ProductList";
 import Form from "./components/Form/Form";
+import * as PropTypes from "prop-types";
+
+function Pagination(props) {
+    return null;
+}
+
+Pagination.propTypes = {
+    shape: PropTypes.string,
+    count: PropTypes.number,
+    variant: PropTypes.string
+};
 
 function App() {
     const {onToggleButton, tg} = useTelegram();
@@ -17,9 +28,10 @@ function App() {
         <div className="App">
             <Header />
             <Routes>
-                <Route index element={<Form />}/>
+                <Route index element={<ProductList />}/>
                 <Route path={'form'} element={<Form />}/>
             </Routes>
+            <Pagination count={10} variant="outlined" shape="rounded" />
         </div>
     );
 }
