@@ -3,6 +3,7 @@ import './ProductList.css';
 import ProductItem from "../ProductItem/ProductItem";
 import Pagination from "../Pagination/Pagination";
 import {useEffect} from "react";
+import Search from "../Search/Search";
 
 const products = [
     {
@@ -99,9 +100,31 @@ const products = [
 ]
 
 const ProductList = () => {
+    const [productsList, setProduct] = useState(products);
+    const [searchTerm, setSearchTerm] = useState()
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [postPrePage] = useState(6);
+
+
+    const filter = (searchText, listOfCars) => {
+        if (!searchText){
+            return listOfCars;
+        }
+
+        return listOfCars.filter(({title}) =>
+            title.toLowerCase().includes(searchText.toLowerCase())
+        )
+    }
+
+    useEffect(() => {
+        const Debounce = setTimeout(()=>{
+            const filtered = filter(searchTerm, products);
+            setProduct(filtered);
+        }, 300);
+
+        return () => clearTimeout(Debounce);
+    }, [searchTerm])
 
     useEffect(() => {
         setLoading(false);
@@ -109,13 +132,18 @@ const ProductList = () => {
 
     const indexOfLastPost = currentPage * postPrePage;
     const indexOfFirstPost = indexOfLastPost - postPrePage;
-    const currentPosts = products.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = productsList.slice(indexOfFirstPost, indexOfLastPost);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
     return (
         <div>
-
+            <input type="text"
+                   className={'search'}
+                   value={searchTerm}
+                   autoFocus
+                   onChange={(e) => setSearchTerm(e.target.value)}
+            />
             <div className={'list'}>
                 {currentPosts.map(item => (
                     <ProductItem kay={item.id}
@@ -126,7 +154,7 @@ const ProductList = () => {
                     />
                 ))}
             </div>
-            <Pagination postsPrePage={postPrePage} totalPosts={products.length} paginate={paginate}/>
+            <Pagination postsPrePage={postPrePage} totalPosts={productsList.length} paginate={paginate}/>
         </div>
 
     );

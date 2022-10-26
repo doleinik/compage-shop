@@ -30,5 +30,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@syncfusion/ej2-react-dropdowns": "^20.3.50"
   }
 }
